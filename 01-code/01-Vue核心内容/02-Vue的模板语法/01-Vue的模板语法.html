@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>每天都被自己帅醒!</title>
+    <link rel="stylesheet" href="">
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+   
+    <div id="app">
+        <h2>插值</h2>
+        <p>需求:显示插值数据</p>
+        <span>{{msg}}</span>
+        <p>需求:现实插值的大写</p>
+        <span>{{msg.toUpperCase()}}</span>
+        <p>需求:现实插值的反转内容</p>
+        <span>{{msg.split(' ').reverse().join(' ')}}</span>
+        <h2>指令之数据的强制绑定</h2>
+            <a href="url">百度</a>
+            <a v-bind:href="url">百度</a>
+            <h3>简写的方式: v-bind:属性名-----> :属性名="值"</h3>
+            <a :href="url">百度</a>
+        <h2>事件监听</h2>
+        <button v-on:click="showMsg">按钮1</button>
+        <button @click="showMsg2">按钮2</button>
+        <button @click="showMsg3('日照香炉生紫烟,要看情侣在林间')">按钮3</button>
+       
+        
+    </div>
+    <script type="text/javascript">
+
+        //今天所有实例化Vue的对象,几乎没怎么使用
+        //实例化Vue对象
+        const vm = new Vue({
+            //通过选择器的方式获取html中的容器(模版)
+            el:'#app',
+            data:{
+               // msg:'床前明月光,健哥去开窗,遇到一耳光,牙齿掉光光'
+               msg:'What Are you no Sha lei',
+               url:'http://www.baidu.com'
+            },
+            methods: {
+                //方法
+                //es6的写法
+                showMsg(){
+                    console.log('今天天气真好')
+                },
+               //es5的写法: showmMsg2:function(){}
+               showMsg2(){
+                   console.log('总是下雨')
+               },
+               showMsg3(txt){
+                   console.log(txt)
+               }
+            }
+        })
+
+
+
+
+
+        /**
+         * 
+         * 强制绑定数据:希望某个标签中的某个属性值是动态的值,此时使用v-bind:属性名字
+         * 强制绑定数据:v-bind--->简写--->  :属性名字="值"
+         * 绑定事件监听(添加事件,绑定事件)----> v-on:事件名字="方法"  简写---> @事件名字="方法"
+         * 强制绑定数据:v-bind
+         * 绑定事件: v-on
+         * 方法几乎都是在实例化Vue对象的配置中的methods对象中书写
+         *
+         *
+         */
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>玉树临风美少年，揽镜自顾夜不眠 </title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <link rel="stylesheet" type="text/css" href="" />
+    <style type="text/css">
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <p>{{msg}}</p>
+    </div>
+
+    <script type="text/javascript">
+
+        /**
+         * 
+         * 1.要想使用vue(写vue的代码),首先引入vue.js文件(后期,可直接安装vue)
+         * 2.在script标签中,直接实例化Vue对象
+         * 3.在Vue({})中写的是配置内容(对象)
+         * el:'#app'------->选择器(根据选择器去html标签中找相对应的模版(id为app的div容器))
+         * data:是一个对象,里面写的几乎都是属性和值之间的关系(键值对)
+         * html中的代码解释:
+         * {{msg}}-----------插值语法---------双大括号语法
+         * 
+         * data对象中的数据我们一般叫属性
+         * html中使用到了data中的相关数据-----表达式
+         * 
+         * 数据和界面之间的交互的桥梁使用的是vue的技术,这种方式:MVVM
+         * 
+         * M:数据
+         * V:界面
+         * VM: Vue
+         * 
+         * 
+         */
+
+        const vm = new Vue({
+            el: '#app',//选择器
+            data: {
+                msg: '听说广州小蛮腰很出名,那么深圳呢?',
+
+            }
+        })
+
+    </script>
+</body>
+
+</html>

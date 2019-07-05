@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>每天都被自己帅醒!</title>
+    <link rel="stylesheet" href="">
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+
+    <script type="text/javascript">
+        //需求:当某个对象的属性值发生变化后,和该属性相关联的属性的值也会自动变化
+        //例子:如果person对象中的firstName或者lastName属性值改变,那么相关联的fullName属性值会自动改变
+        //为当前的某个对象,添加某个属性,对该属性的一个配置
+        // Object.defineProperty(对象,'属性名字',配置对象)
+
+
+        //例子:------原生JS来实现
+        const person = {
+            fisrtName: '东方',
+            lastName: '不败'
+        }
+
+        //调用Object对象的方法即可实现(该方法将会在Vue.js的源代码中多次使用)
+        Object.defineProperty(person, 'fullName', {
+            //为fullName属性的一个配置
+            configurable: false,//该属性可以被重新定义,默认值是false
+            enumerable: true,//该属性可以被枚举遍历,默认值是false
+            // value: '哈-哈',//该属性默认是:哈-哈
+            // writable: true,//该属性的值可以修改
+            get() {
+                return this.fisrtName + '-' + this.lastName //此时的this指向的是person对象
+            },
+            set(val) {
+                //val就是此时fullName属性的值,当我设置或者修改fullName属性值的时候,自动进入该方法
+                //fullName="南宫-燕儿",我希望,firstName="南宫",lastName="燕儿"自动的
+                const name = val.split('-')
+                this.fisrtName = name[0]
+                this.lastName = name[1]
+            }
+        })
+
+        //为person对象添加一个属性fullName
+        person.fullName = person.fisrtName + '-' + person.lastName
+        console.log(person.fullName)
+        //修改某属性值
+        person.fisrtName = '诸葛'
+        person.lastName = '孔明'
+        //此时并没法发生我们预期的结果
+        console.log(person.fullName)
+        //修改fullName属性的值
+        person.fullName = '欧阳-健哥'
+        console.log(person.fisrtName)
+        console.log(person.lastName)
+
+
+
+
+
+    </script>
+
+
+</body>
+
+</html>

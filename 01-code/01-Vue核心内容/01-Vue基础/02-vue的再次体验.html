@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>每天都被自己帅醒!</title>
+    <link rel="stylesheet" href="">
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" v-model="msg">
+        <p>{{msg}}</p>
+    </div>
+    <script type="text/javascript">
+        /**
+         * v-model-----指令
+         * 总结: 在Vue开发中，如果在html标签的内部,有v-开头的属性,此时这些写法的属性,都叫指令
+         * v-model指令:绑定数据的指令
+         * v-model="表达式" 表达式----->在实例化Vue的时候,data对象中内部的属性的名字(计算属性的属性也可以在v-model指令中书写)
+         *
+         */
+        
+        //实例化Vue对象
+        const vm = new Vue({
+            el:'#app',
+            data:{
+                msg:'hello'
+            }
+        })
+
+
+    </script>
+
+</body>
+
+</html>

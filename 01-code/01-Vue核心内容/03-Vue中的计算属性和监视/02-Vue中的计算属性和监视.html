@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>每天都被自己帅醒!</title>
+    <link rel="stylesheet" href="">
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <fieldset>
+            <legend>姓名操作</legend>
+            姓氏:
+            <input type="text" placeholder="请输入姓名" v-model="firstName"><br />
+            名字:
+            <input type="text" placeholder="请输入名字" v-model="lastName"><br />
+        </fieldset>
+        <fieldset>
+            <legend>单向和双向操作</legend>
+            姓名(单向操作):<input type="text" placeholder="显示姓名" v-model="fullName1"><br />
+            姓名(单向操作):<input type="text" placeholder="显示姓名" v-model="fullName2"><br />
+            姓名(双向操作):<input type="text" placeholder="显示姓名" v-model="fullName3"><br />
+        </fieldset>
+        <p>{{fullName1}}</p>
+        <p>{{fullName1}}</p>
+        <p>{{fullName1}}</p>
+        <p>{{fullName1}}</p>
+        <p>{{fullName1}}</p>
+     
+    </div>
+
+    <script type="text/javascript">
+        const vm = new Vue({
+            //选择器
+            el: '#app',
+            //数据
+            data: {
+                firstName: '东方',
+                lastName: '不败',
+                fullName2:'哈-哈'//定义
+            },
+            //计算相关的配置:计算属性
+            computed: {
+                //第一种:一般都写属性的名字,使用对象的方式进行属性值的配置操作
+                //两个配置的写法:get操作和set操作
+                //第二种:
+                //如果只是针对某个属性的get操作,那么可以简写:属性名(){} 此时就是get的方法
+                // fullName1:{
+                //     get(){},//获取,当在代码中出现了fullName1属性的获取该值的操作的时候,自动调用get方法内部
+                //     set(){}//设置或者修改,fullName1='值',会自动的进入set方法内部
+                // }
+
+                //get操作
+                fullName1() {
+                    console.log('调用了')
+                    //this是当前的实例对象---vm
+                    return this.firstName + '-' + this.lastName
+                },
+                fullName3: {
+                    get() {
+                        //获取firstName和lastName的属性值
+                        return this.firstName + '-' + this.lastName
+                    },
+                    set(val) {
+                        //此时val就是fullName3的属性值
+                        const name = val.split('-')
+                        this.firstName = name[0]
+                        this.lastName = name[1]
+                    }
+                }
+            },
+            //对属性进行监视,然后,相关联的属性也会自动发生变化
+            //监视的写法有两种:局部监视和全局监视
+            watch: {
+                //此时监视firstName,设置fullName2的属性
+                firstName(val){
+                    //此时的val是firstName属性的值
+                    this.fullName2=val+'-'+this.lastName
+
+                }
+            }
+        })
+        //在外部写,并且使用的是vm---函数式对象
+        vm.$watch('lastName',function(val){
+            console.log('调用啦-------')
+            //此时的val是lastName属性的值
+            //监视lastName属性的值,设置fullName2的属性
+            this.fullName2=this.firstName+'-'+val
+
+        })
+        //如果是全局的方法或者属性应该是通过Vue来调用,并且Vue.出来的属性名和方法名字就是普通的写法
+        //如果是通过实例对象调用属性或者方法,在Vue中,属性的名字和方法前面都有一个$开头的
+        //总结:在Vue中如果看到了$开头的属性名字或者是方法名字,那么此时该属性或者是方法是实例对象的
+        //计算属性有缓存,效果高
+        //计算属性的操作,get,在页面加载后就会自动执行一次
+        //但是watch操作,页面加载后并没有操作,
+    </script>
+</body>
+
+</html>

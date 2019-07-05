@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>每天都被自己帅醒!</title>
+        <link rel="stylesheet" href="">
+        <script type="text/javascript" src="../js/vue.js"></script>
+    </head>
+    <body>
+    <div id="app">
+        <input type="text" value="" v-model="msg" @keyup="upHandler1">
+        <input type="text" value="" v-model="msg" @keyup.enter="upHandler2" >
+        <input type="text" value="" v-model="msg" @keyup.13="upHandler3">
+    </div>
+        <script type="text/javascript">
+            const vm = new Vue({
+                el:'#app',
+                data:{
+                    msg:'我是文本框'
+                },
+                methods: {
+                    upHandler1(e){
+                       if(e.keyCode===13){
+                           console.log('回车按下了')
+                       }
+                    },
+                    upHandler2(){
+                       console.log('按下了回车')
+                    },
+                    upHandler3(){
+                        console.log('真的按下了回车')
+                    }
+                }
+            })
+           
+        </script>
+    </body>
+</html>

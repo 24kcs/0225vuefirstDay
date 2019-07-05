@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>每天都被自己帅醒!</title>
+    <link rel="stylesheet" href="">
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <style type="text/css">
+        #app {
+            width: 600px;
+            border: 1px solid red;
+            margin: 0 auto;
+        }
+
+        .cls {
+            color: green;
+        }
+
+        .cls1 {
+            color: deeppink;
+        }
+
+        .cls2 {
+            font-size: 30px;
+        }
+
+        .cls3 {
+            font-family: '全新硬笔行书简'
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <div id="app">
+        <fieldset>
+            <legend>class绑定:直接设置class值</legend>
+            <p :class="myClass">这是一个P</p>
+            <button @click="changeClassName">改变样式</button>
+        </fieldset>
+
+        <fieldset>
+            <legend>class绑定:使用对象的方式(cls是类名,固定的写法(写的肯定是类名,后面跟的是布尔值))</legend>
+            <p :class="{cls1:isCls1,cls2:isCls2}">不乱于心,不困于情</p>
+            <button @click="toggleClassName">改变样式</button>
+        </fieldset>
+        <fieldset>
+            <legend>class绑定:使用数组方式([]里面是动态的属性,需要在data中定义)</legend>
+            <p :class="[classA,classB,classC]">不念过去,不畏将来</p>
+            <button @click="addClassName">改变样式</button>
+        </fieldset>
+        <fieldset>
+            <legend>class绑定:使用对象方式2</legend>
+            <p :class="['cls1',{cls3:isCls3}]">不念过去,不畏将来</p>
+            <button @click="isCls3=false">改变样式</button>
+        </fieldset>
+        <fieldset>
+            <legend>class绑定:动态绑定和静态绑定结合</legend>
+            <p class="cls1" :class="classA">不念过去,不畏将来</p>
+            <button @click="classA='cls2'">改变样式</button>
+        </fieldset>
+        <fieldset>
+            <legend>class绑定:静态绑定,使用动态的方式绑定数据,同时内部使用静态值</legend>
+            <p :class="['cls1','cls2','cls3']">不念过去,不畏将来</p>
+        </fieldset>
+    </div>
+
+    <script type="text/javascript">
+    const vm = new Vue({
+        el:'#app',
+        data:{
+            myClass:'',
+            isCls1:true,
+            isCls2:false,
+            classA:'',
+            classB:'',
+            classC:'',
+            isCls3:true
+
+        },
+        methods: {
+            //点击按钮,改变myClass属性的值
+            changeClassName(){
+                this.myClass='cls'
+            },
+            //点击按钮切换类样式的名字(实际上是改变对应的布尔值)
+            toggleClassName(){
+                this.isCls1=!this.isCls1
+                this.isCls2=!this.isCls2
+            },
+            //设置三个属性的值
+            addClassName(){
+                this.classA='cls1'
+                this.classB='cls2'
+                this.classC='cls3'
+            }
+        }
+    })
+
+    //可以直接通过Vue的方式修改元素的class的值
+    //通过v-bind指令,动态的绑定标签的class----->:class=""  此时的双引号中的表达式使用的是data对象中的属性
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>每天都被自己帅醒!</title>
+    <link rel="stylesheet" href="">
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h2>表单数据绑定操作</h2>
+        <form action="xxx/" method="post">
+            <fieldset>
+                <legend>帐号和密码</legend>
+                <!--在文本框中添加一个v-model-->
+                用户名: <input type="text" v-model="users.userName"><br />
+                密码: <input type="password" v-model="users.userPwd"><br />
+            </fieldset>
+            <fieldset>
+                <legend>性别选择器</legend>
+                <input type="radio" name="gender" value="男" v-model="users.sex">男
+                <input type="radio" name="gender" value="女" v-model="users.sex">女
+
+            </fieldset>
+            <fieldset>
+                <legend>爱好选择</legend>
+                <input type="checkbox" value="eat" v-model="users.likes">吃饭
+                <input type="checkbox" value="sleep" v-model="users.likes">睡觉
+                <input type="checkbox" value="play" v-model="users.likes">打豆豆
+            </fieldset>
+            <fieldset>
+                <legend>城市选择和文本内容</legend>
+                <select v-model="users.cityId">
+                    <optgroup label="中国">
+                      <option :value="item.id" v-for="item in users.citys">
+                          {{item.name}}
+                      </option>
+                    </optgroup>
+                </select>
+                <br />
+                <textarea v-model="users.info" name="" id="" cols="80" rows="5">哈哈</textarea>
+            </fieldset>
+            <input type="submit" value="注册" @click.prevent="register">
+        </form>
+    </div>
+    <script type="text/javascript">
+
+
+        const vm = new Vue({
+            el:'#app',
+            data:{
+                users:{
+                    userName:'',
+                    userPwd:'',
+                    sex:'男',
+                    likes:['play'],
+                    cityId:4,
+                    citys:[
+                        {id:1,name:'北京'},
+                        {id:2,name:'上海'},
+                        {id:3,name:'重庆'},
+                        {id:4,name:'天津'}
+                    ],
+                    info:'真好'
+                }
+            },
+            methods: {
+                register(){
+                    console.log(this.users.userName+'==='+this.users.userPwd)
+                }
+            }
+        })
+
+
+    </script>
+</body>
+
+</html>

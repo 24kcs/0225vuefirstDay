@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>每天都被自己帅醒!</title>
+        <link rel="stylesheet" href="">
+        <script type="text/javascript" src="../js/vue.js"></script>
+    </head>
+    <body>
+    
+        <div id="app">
+            <p>显示结果:{{content}}</p>
+            <p v-text="content"></p>
+            <p v-html="content"></p>
+            <p ref="p1">我来自哪里呢</p>
+            <button @click="showResult">显示效果</button>
+        </div>
+        <script type="text/javascript">
+
+        /**
+         * 
+         * 指令的作用:就是操作标签
+         * v-text:纯文本
+         * v-html:html标签内容
+         * ref:为某个元素注册一个唯一的标识,vue对象通过$refs.这个属性值即可访问该元素对象
+         * 
+         * 
+        */
+            var vm = new Vue({
+                el:'#app',
+                data:{
+                    content:'<a href="http://www.baidu.com">百度</a>'
+                },
+                methods:{
+                    showResult(){
+                        console.log(this.$refs.p1.innerHTML)
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

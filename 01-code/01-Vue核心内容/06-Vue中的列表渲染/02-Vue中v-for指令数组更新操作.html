@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>每天都被自己帅醒!</title>
+    <link rel="stylesheet" href="">
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <fieldset>
+            <legend>数组数据更新操作</legend>
+            <button @click="addPerson">添加</button><br>
+            名字:<input type="text" v-model="userName"><br>
+            年龄:<input type="text" v-model="userAge"><br>
+            描述:<input type="text" v-model="userDesc"><br>
+            <ul>
+                <li v-for="(per,index) in persons" :key="per.id">
+
+                    {{index}}===={{per.id}}===={{per.name}}===={{per.age}}===={{per.desc}}
+                    <button @click="deletePersn(index)">删除</button>
+                    <button @click="updatePerson(index,{id:++userId,name:userName,age:userAge,desc:userDesc})">更新</button>
+                </li>
+            </ul>
+        </fieldset>
+    </div>
+    <script type="text/javascript">
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                userId: 5,
+                userName: '',
+                userAge: '',
+                userDesc: '',
+                persons: [
+                    { id: 1, name: '小明', age: 10, desc: '好人啊1' },
+                    { id: 2, name: '小红', age: 10, desc: '好人啊2' },
+                    { id: 3, name: '小花', age: 10, desc: '好人啊3' },
+                    { id: 4, name: '小绿', age: 10, desc: '好人啊4' }
+                ]
+
+            },
+            methods: {
+                addPerson() {
+                    this.persons.push({ id: ++this.userId, name: this.userName, age: this.userAge, desc: this.userDesc })
+                },
+                deletePersn(index) {
+                    this.persons.splice(index, 1)
+                },
+                updatePerson(index,per){
+                    this.persons[index].id=per.id
+                    this.persons[index].name=per.name
+                    this.persons[index].age=per.age
+                    this.persons[index].desc=per.desc
+                }
+               
+            }
+        })
+
+    </script>
+</body>
+
+</html>

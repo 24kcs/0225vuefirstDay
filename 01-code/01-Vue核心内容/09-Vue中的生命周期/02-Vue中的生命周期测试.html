@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>每天都被自己帅醒!</title>
+    <link rel="stylesheet" href="">
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- <button @click="clear">显示效果</button>
+        <p v-show="isOk">你打我啊</p>
+        <input type="text" name="" id="" v-model="test"> -->
+        <button @click="clear">显示效果</button>
+        <p v-show="isOk">你打我啊</p>
+        <input type="text" v-model="test">
+    </div>
+    <script type="text/javascript">
+
+        const vm = new Vue({
+            el:'#app',
+            data:{
+                isOk:true,
+                test:''
+            },
+            beforeCreate () {
+                console.log('初始化之前:'+this.isOk)
+            },
+            created () {
+                console.log('初始化之后:'+this.isOk)
+            },
+            beforeMount () {
+                console.log('页面显示前')
+              
+            },
+            mounted () {
+                console.log('页面显示后')
+                setInterval(() => {
+                    this.isOk=!this.isOk
+                }, 3000);
+            },
+            beforeUpdate () {
+                console.log('更新前')
+            },
+            updated () {
+                console.log('更新后')
+            },
+            beforeDestroy () {
+                console.log('销毁前')
+            },
+            destroyed () {
+                console.log('销毁了')
+            },
+            methods: {
+                clear(){
+                    this.$destroy()
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

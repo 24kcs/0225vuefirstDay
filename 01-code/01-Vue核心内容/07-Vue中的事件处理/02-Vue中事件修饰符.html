@@ -26,48 +26,49 @@
 <body>
     <div id="app">
         <h2>2.事件修饰符:@click.prevent="test3"</h2>
-        <a href="http://www.baidu.com" @click="stopShow1">百度1</a>
-        <a href="http://www.baidu.com" @click.prevent="stopShow2">百度2</a>
-        <div class="cls1" @click="divShow1">
-            <div class="cls2" @click="divShow2"></div>
+        <a href="http://www.baidu.com" @click="stopPrevent">百度1</a>
+        <a href="http://www.baidu.com"  @click.prevent="stopPrevent2">百度2</a>
+        <div class="cls1" @click="show1">
+            <div class="cls2" @click="show2"></div>
         </div>
         <hr>
-        <div class="cls1" @click="divShow3">
-            <div class="cls2" @click.stop="divShow4"></div>
+        <div class="cls1" @click="show3">
+            <div class="cls2" @click.stop="show4"></div>
         </div>
-        
-    </div>
-   <script type="text/javascript">
-    const vm = new Vue({
-        el:'#app',
-        data:{
 
-        },
-        methods:{
-            stopShow1(e){
-                console.log('第一个超链接被点击了')
-                e.preventDefault()
+    </div>
+    <script type="text/javascript">
+        const vm = new Vue({
+            el:'#app',
+            data:{
+
             },
-            stopShow2(){
-                console.log('第二个超链接被点击了')
-            },
-            divShow1(){
-                console.log('外面的div被点了')
-               
-            },
-            divShow2(e){
-                console.log('里面div被点了')
-                e.stopPropagation()
-            },
-            divShow3(){
-                console.log('外面div点了')
-            },
-            divShow4(){
-                console.log('里面div被点了')
-            },
-        }
-    })
-   </script>
+            methods: {
+                stopPrevent(e){
+                    console.log('我被点了')
+                    //点击超链接,取消默认事件
+                    e.preventDefault()
+                },
+                stopPrevent2(){
+                    console.log('我也被点了')
+                },
+                show1(){
+                    console.log('外面的div被点了')
+                },
+                show2(e){
+                    console.log('里面的div被点了')
+                    e.stopPropagation()
+                },
+
+                show3(){
+                    console.log('外面的div被点了3')
+                },
+                show4(){
+                    console.log('里面的div被点了4')
+                },
+            }
+        })
+    </script>
 </body>
 
 </html>

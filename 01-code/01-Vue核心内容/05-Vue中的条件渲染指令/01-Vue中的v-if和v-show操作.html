@@ -23,25 +23,40 @@
             <legend>
                 通过v-if和v-else指令操作:对元素(标签)干掉或者新增
             </legend>
-            <input type="button" value="切换显示效果">
-            <p id="p1">我喜欢你</p>
-            <p id="p2">我讨厌你</p>
+            <input type="button" value="切换显示效果" @click="toggleIsOK">
+            <p id="p1" v-if="isOk">我喜欢你</p>
+            <p id="p2" v-else>我讨厌你</p>
         </fieldset>
         <fieldset>
             <legend>通过v-show指令操作:对元素(标签)样式的操作</legend>
-            <input type="button" value="切换效果">
-            <p id="p3">在一起</p>
-            <p id="p4">分开</p>
+            <input type="button" value="切换效果" @click="show=!show">
+            <p id="p3" v-show="show">在一起</p>
+            <p id="p4" v-show="!show">分开</p>
         </fieldset>
 
         <fieldset>
             <legend>简写操作</legend>
-            <input type="button" value="切换效果">
+            <input type="button" value="切换效果" @click="">
             <p id="p5">在一起</p>
             <p id="p6">分开</p>
         </fieldset>
+
+        <p v-if="seen">这是一个p</p>
     </div>
     <script type="text/javascript">
+        const vm = new Vue({
+            el:'#app',
+            data:{
+                isOk:true,
+                seen:false,
+                show:true
+            },
+            methods: {
+                toggleIsOK(){
+                    this.isOk=!this.isOk
+                }
+            }
+        })
        
     </script>
 </body>

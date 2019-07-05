@@ -14,15 +14,22 @@
     <div id="app">
         <fieldset>
             <legend>指令:v-else if操作</legend>
-            <input type="button" value="显示效果">
-            <p>90-100之间</p>
-            <p>80-90之间</p>
-            <p>70-80之间</p>
-            <p>60-70之间</p>
+            <input type="button" value="显示效果" @click="score='F'">
+            <p v-if="score==='A'">90-100之间</p>
+            <p v-else-if="score==='B'">80-90之间</p>
+            <p v-else-if="score==='C'">70-80之间</p>
+            <p v-else>60-70之间</p>
         </fieldset>
     </div>
     <script type="text/javascript">
-    
+        //需求:页面加载后,根据分数的级别的值显示对应的分数的阶段,点击按钮,需改分数级别
+
+        const vm = new Vue({
+            el:'#app',
+            data:{
+                score:'C'
+            }
+        })
     </script>
 </body>
 

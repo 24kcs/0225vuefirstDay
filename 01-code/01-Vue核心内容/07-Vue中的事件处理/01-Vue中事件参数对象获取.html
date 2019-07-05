@@ -11,11 +11,25 @@
     <body>
     <div id="app">
         <h2>1.事件监听</h2>
-       <button>按钮1</button>
-       <button>按钮2</button>
+       <button @click="showMsg('哈哈,我又变帅了')">按钮1</button>
+       <button @click="showMsg2('我喜欢男人,健哥说',$event)">按钮2</button>
     </div>
         <script type="text/javascript">
-         
-        </script>
+            const vm = new Vue({
+                el:'#app',
+                //方法
+                methods: {
+                    showMsg(txt){
+                        console.log(txt)
+                    },
+                    showMsg2(txt,evt){
+                        //此事需要这个事件参数
+                        console.log(txt+'====='+evt.target.innerHTML)
+                    }
+                }
+            })
+            //如果想要在Vue实例对象的某些相关方法中使用到事件参数对象(前提是在html模版中已经传了其他的参数了,或者没有传,但是还要想使用事件参数对象)就需要在html模版中的某个事件的回调函数中传入$event
+            //此时在方法中进行接收该参数,可以直接使用该事件参数对象
+        </script>   
     </body>
 </html>

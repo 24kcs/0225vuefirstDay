@@ -14,17 +14,54 @@
     <div id="app">
         <fieldset>
             <legend>数据排序及相关操作</legend>
-            <input type="text" placeholder="请输入名字" >
+            <input type="text" placeholder="请输入名字" v-model="searchName">
             <ul>
-               
+                <li v-for="(per,index) in pers">
+                    索引:{{index}}=====id:{{per.id}}====名字:{{per.name}}====={{per.age}}
+                </li>
             </ul>
-            <button>年龄升序</button>
-            <button>年龄降序</button>
-            <button>原来顺序</button>
+            <button @click="state=1">年龄升序</button>
+            <button @click="state=2">年龄降序</button>
+            <button @click="state=0">原来顺序</button>
         </fieldset>
     </div>
     <script type="text/javascript">
-      
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                searchName: '',
+                state: 0,//标识----值:0---原来顺序,1---升序,2---降序
+                persons: [
+                    { id: 1, name: 'jack', age: 40 },
+                    { id: 2, name: 'rousi', age: 20 },
+                    { id: 3, name: 'lucy', age: 80 },
+                    { id: 4, name: 'baby', age: 70 },
+                    { id: 5, name: 'tom', age: 100 },
+                ]
+            },
+            computed: {
+                //输入名字(某个字母) j
+                //把对应的数组中的相关数据找到
+                pers() {
+                    //获取当前data中所有的属性及相关的值
+                    const { searchName, state, persons } = this
+                    //根据输入的名字进行筛选
+                    const newArr = persons.filter(per => per.name.indexOf(searchName) !== -1)
+                    //判断state的值不是0
+                    if (state != 0) {
+                        //说明此事升序或者是降序
+                        newArr.sort((p1, p2) => {
+                            return state === 2 ? (p2.age - p1.age) : (p1.age - p2.age)
+                        })
+                    }
+
+
+                    return newArr
+
+                }
+
+            }
+        })
     </script>
 </body>
 

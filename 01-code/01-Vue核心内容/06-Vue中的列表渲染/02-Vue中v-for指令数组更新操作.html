@@ -20,47 +20,55 @@
             描述:<input type="text" v-model="userDesc"><br>
             <ul>
                 <li v-for="(per,index) in persons" :key="per.id">
-
-                    {{index}}===={{per.id}}===={{per.name}}===={{per.age}}===={{per.desc}}
-                    <button @click="deletePersn(index)">删除</button>
-                    <button @click="updatePerson(index,{id:++userId,name:userName,age:userAge,desc:userDesc})">更新</button>
+                    索引:{{index}}---id:{{per.id}}====名字:{{per.name}}====年龄:{{per.age}}====描述:{{per.desc}}
+                    <button @click="deletePersonByIndex(index)">删除</button>
+                    <button
+                        @click="updatePerson(index,{id:++userId,name:userName,age:userAge,desc:userDesc})">更新</button>
                 </li>
             </ul>
         </fieldset>
     </div>
     <script type="text/javascript">
+        //首先:页面显示后,在页面中把数据展示出来(数据都在数组中存储)
         const vm = new Vue({
             el: '#app',
             data: {
-                userId: 5,
                 userName: '',
-                userAge: '',
+                userAge: '5',
                 userDesc: '',
+                userId: 10,
                 persons: [
-                    { id: 1, name: '小明', age: 10, desc: '好人啊1' },
-                    { id: 2, name: '小红', age: 10, desc: '好人啊2' },
-                    { id: 3, name: '小花', age: 10, desc: '好人啊3' },
-                    { id: 4, name: '小绿', age: 10, desc: '好人啊4' }
+                    { id: 1, name: '黑崎一护', age: 20, desc: '一刀就可以砍掉一个虚' },
+                    { id: 2, name: '周星驰', age: 30, desc: '一年一影帝,百年周星驰' },
+                    { id: 3, name: '黄家驹', age: 40, desc: '改变了整个华语乐坛的男人' }
                 ]
-
             },
             methods: {
                 addPerson() {
+                    //点击按钮的时候获取三个文本框中的数据,然后加到对应的数组中即可
                     this.persons.push({ id: ++this.userId, name: this.userName, age: this.userAge, desc: this.userDesc })
+                    //清空使用后的数据
+                    this.userName = ''
+                    this.userAge = ''
+                    this.userDesc = ''
                 },
-                deletePersn(index) {
+                deletePersonByIndex(index) {
+                    //根据索引删除数组中对应的索引位置的对象
                     this.persons.splice(index, 1)
                 },
-                updatePerson(index,per){
-                    this.persons[index].id=per.id
-                    this.persons[index].name=per.name
-                    this.persons[index].age=per.age
-                    this.persons[index].desc=per.desc
+                updatePerson(index, obj) {
+                    //根据索引修改对应的对应的相关属性值
+                    this.persons[index].id = obj.id
+                    this.persons[index].name = obj.name
+                    this.persons[index].age = obj.age
+                    this.persons[index].desc = obj.desc
+                    //清空使用后的数据
+                    this.userName = ''
+                    this.userAge = ''
+                    this.userDesc = ''
                 }
-               
             }
         })
-
     </script>
 </body>
 

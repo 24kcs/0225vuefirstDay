@@ -15,14 +15,14 @@
         <fieldset>
             <legend>遍历数组</legend>
             <ol>
-                <li>
-            
+                <li v-for="(per,index) in persons">
+                    索引:{{index}}=====名字:{{per.name}}=====年龄:{{per.age}}=====描述:{{per.desc}}
                 </li>
             </ol>
             <hr>
             <ul>
-                <li>
-             
+                <li v-for="per in persons" :key="per.id">
+                    名字:{{per.name}}=====年龄:{{per.age}}=====描述:{{per.desc}}
                 </li>
             </ul>
         </fieldset>
@@ -30,14 +30,29 @@
         <fieldset>
             <legend>遍历对象</legend>
             <ul>
-                <li>
-                
+                <li v-for="(value,key,index) in obj">
+                    索引:{{index}}--------键:{{key}}-----值:{{value}}
                 </li>
             </ul>
         </fieldset>
     </div>
     <script type="text/javascript">
-      
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                persons: [
+                    { id: 1, name: '卡卡西', age: 10, desc: '和谁都可以搞一次的男人' },
+                    { id: 2, name: '自来也', age: 10, desc: '一生之中都比较执着的男人:一直喜欢女人' },
+                    { id: 3, name: '大蛇丸', age: 10, desc: '帅气的科学家' },
+                    { id: 4, name: '纲手', age: 10, desc: '一直都是那么美丽好赌' }
+                ],
+                obj: {
+                    name: '红颜祸水',
+                    age: 58,
+                    sex: '男'
+                }
+            }
+        })
     </script>
 </body>
 
